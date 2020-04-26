@@ -12,10 +12,55 @@
     <!--<constructor-arg name="name" value="sanzhixiong"></constructor-arg>-->
     <!--<constructor-arg name="age" value="22"></constructor-arg>-->
     <!--</bean>-->
+    <!--<bean id="person" class="com.joy.bean.Person">-->
+    <!--<constructor-arg name="id" value="1"></constructor-arg>-->
+    <!--&lt;!&ndash;<constructor-arg value="sanzhixiong"></constructor-arg>&ndash;&gt;-->
+    <!--<constructor-arg value="22"></constructor-arg>-->
+    <!--</bean>-->
 
-    <bean id="person" class="com.joy.bean.Person">
-        <constructor-arg name="id" value="1"></constructor-arg>
-        <!--<constructor-arg value="sanzhixiong"></constructor-arg>-->
-        <constructor-arg value="22"></constructor-arg>
+    <!--<bean id="person" class="com.joy.bean.Person">-->
+    <!--<constructor-arg name="id" value="1"></constructor-arg>-->
+    <!--<constructor-arg value="sanzhixiong"></constructor-arg>-->
+    <!--<constructor-arg value="22"></constructor-arg>-->
+    <!--&lt;!&ndash;数组的两种方式&ndash;&gt;-->
+    <!--</bean>-->
+
+    <!--<bean id="person" class="com.joy.bean.Person">-->
+    <!--<property name="id" value="1"></property>-->
+    <!--<property name="age" value="20"></property>-->
+    <!--<property name="name" value="lisan"></property>-->
+    <!--&lt;!&ndash;第一种方式执行操作&ndash;&gt;-->
+    <!--&lt;!&ndash;<property name="hobbies" value="hello,world,sanzhixiong"></property>&ndash;&gt;-->
+    <!--<property name="hobbies">-->
+    <!--<array>-->
+    <!--<value>hello</value>-->
+    <!--<value>world</value>-->
+    <!--<value>sanzhixiong</value>-->
+    <!--</array>-->
+    <!--</property>-->
+    <!--&lt;!&ndash;list基础操作&ndash;&gt;-->
+    <!--<property name="list">-->
+    <!--<list>-->
+    <!--<value>hello</value>-->
+    <!--<value>world</value>-->
+    <!--<value>sanzhixiong</value>-->
+    <!--</list>-->
+    <!--</property>-->
+    <!--<property name="addList">-->
+    <!--<list>-->
+    <!--<bean class="com.joy.bean.Address">-->
+    <!--<property name="town" value="宜昌"></property>-->
+    <!--</bean>-->
+    <!--</list>-->
+    <!--</property>-->
+    <!--</bean>-->
+    <bean id="person" class="com.joy.bean.Person" abstract="true">
+        <property name="id" value="1"></property>
+        <property name="name" value="zhangsan"></property>
+        <property name="age" value="21"></property>
+    </bean>
+    <!--parent:指定bean的配置信息继承于哪个bean-->
+    <bean id="person2" class="com.joy.bean.Person" parent="person">
+        <property name="name" value="lisi"></property>
     </bean>
 </beans>
