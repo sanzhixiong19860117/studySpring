@@ -12,7 +12,11 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class MyTest {
     public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext("ioc.xml");
+        //注意点
+        //通过id
+//        final Person person = context.getBean("person", Person.class);
+        //通过类型来查找
         final Person person = context.getBean("person", Person.class);
-        System.out.println(person.getAge());
+        System.out.println(person.getId());
     }
 }

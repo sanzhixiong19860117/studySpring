@@ -10,6 +10,28 @@ public class Person {
     private String name;
     private int age;
 
+    public Person() {
+    }
+
+    public Person(int id, String name, int age) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+    }
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+        System.out.println("第二个构造函数");
+    }
+
+    public Person(int id, int age) {
+        this.id = id;
+        this.age = age;
+        System.out.println("第一个构造函数");
+    }
+
+
     public int getId() {
         return id;
     }
