@@ -189,3 +189,202 @@ public Person(String name, int age) {
     </bean>
 ```
 
+### 6.定义复杂类型
+
+1.常用的数组的方式
+
+使用array标签引入数组类型的数据
+
+使用ref引用对象
+
+map，set，list等基础的运用
+
+```java
+package com.joy.bean;
+
+import java.util.Arrays;
+import java.util.List;
+
+/**
+ * @author joy
+ * @version 1.0
+ * @date 2020/4/26 15:36
+ */
+public class Person {
+    private int id;
+    private String name;
+    private int age;
+    //数字的运用
+    private String[] hobbies;
+    //list的操作
+    private List<String> list;
+    //增加复杂的操作
+    private List<Address> addList;
+
+    public List<Address> getAddList() {
+        return addList;
+    }
+
+    public void setAddList(List<Address> addList) {
+        this.addList = addList;
+    }
+
+    public List<String> getList() {
+        return list;
+    }
+
+    public void setList(List<String> list) {
+        this.list = list;
+    }
+
+    public Person() {
+    }
+
+    public Person(int id, String name, int age) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+    }
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+        System.out.println("第二个构造函数");
+    }
+
+    public Person(int id, int age) {
+        this.id = id;
+        this.age = age;
+        System.out.println("第一个构造函数");
+    }
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String[] getHobbies() {
+        return hobbies;
+    }
+
+    public void setHobbies(String[] hobbies) {
+        this.hobbies = hobbies;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                ", hobbies=" + Arrays.toString(hobbies) +
+                ", list=" + list +
+                ", addList=" + addList +
+                '}';
+    }
+}
+
+```
+
+对应的配置文件
+
+```xml
+<bean id="person" class="com.joy.bean.Person">
+        <property name="id" value="1"></property>
+        <property name="age" value="20"></property>
+        <property name="name" value="lisan"></property>
+        <!--第一种方式执行操作-->
+        <!--<property name="hobbies" value="hello,world,sanzhixiong"></property>-->
+        <property name="hobbies">
+            <array>
+                <value>hello</value>
+                <value>world</value>
+                <value>sanzhixiong</value>
+            </array>
+        </property>
+        <!--list基础操作-->
+        <property name="list">
+            <list>
+                <value>hello</value>
+                <value>world</value>
+                <value>sanzhixiong</value>
+            </list>
+        </property>
+        <property name="addList">
+            <list>
+                <bean class="com.joy.bean.Address">
+                    <property name="town" value="宜昌"></property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+```
+
+### 7.继承关系
+
+```xml
+<bean id="person" class="com.joy.bean.Person">
+        <property name="id" value="1"></property>
+        <property name="name" value="zhangsan"></property>
+        <property name="age" value="21"></property>
+    </bean>
+    <!--parent:指定bean的配置信息继承于哪个bean-->
+    <bean id="person2" class="com.joy.bean.Person" parent="person">
+        <property name="name" value="lisi"></property>
+    </bean>
+```
+
+使用抽象类的关键也可以在这里进行不能实例化的类abstract操作
+
+```xml
+<bean id="person" class="com.joy.bean.Person" abstract="true">
+        <property name="id" value="1"></property>
+        <property name="name" value="zhangsan"></property>
+        <property name="age" value="21"></property>
+    </bean>
+    <!--parent:指定bean的配置信息继承于哪个bean-->
+    <bean id="person2" class="com.joy.bean.Person" parent="person">
+        <property name="name" value="lisi"></property>
+    </bean>
+```
+
+加了abstract=true以后我们运行主函数
+
+```java
+ApplicationContext context = new ClassPathXmlApplicationContext("ioc.xml");
+        //注意点
+        //通过id
+//        final Person person = context.getBean("person", Person.class);
+        //通过类型来查找
+        final Person person2 = context.getBean("person", Person.class);
+        System.out.println(person2);
+```
+
+会出现报错
+
+Exception in thread "main" org.springframework.beans.factory.BeanIsAbstractException: Error creating bean with name 'person': Bean definition is abstract
+	at org.springframework.beans.factory.support.AbstractBeanFactory.checkMergedBeanDefinition(AbstractBeanFactory.java:1412)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:298)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:207)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1114)
+	at com.test.MyTest.main(MyTest.java:20)
