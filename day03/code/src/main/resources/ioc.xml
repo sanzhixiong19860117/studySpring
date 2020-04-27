@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-
+       xmlns:contest="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
 
     <!--利用工厂进行创建
     1.静态工厂类操作
@@ -13,6 +16,21 @@
     1.创建实例化工厂类
     2.使用factory-bean来引用实例化的类,在使用factory-method方法来进行操作
     -->
-    <bean id="objFactory" class="com.joy.bean.com.joy.factory.ObjFactory"></bean>
-    <bean id="person" class="com.joy.bean.Person" factory-bean="objFactory" factory-method="getPersonObj"></bean>
+    <!--<bean id="objFactory" class="com.joy.bean.com.joy.factory.ObjFactory"></bean>-->
+    <!--<bean id="person" class="com.joy.bean.Person" factory-bean="objFactory" factory-method="getPersonObj"></bean>-->
+    <!--使用初始化类
+    1.定义类
+    destroy-method 初始化方法
+    destroy-method 销毁方法
+    -->
+    <!--<bean id="person" class="com.joy.bean.Person" init-method="init" destroy-method="destory" scope="singleton"></bean>-->
+    <!--&lt;!&ndash;增加一个初始化前后的方法&ndash;&gt;-->
+    <!--<bean id="beanpostProcessor" class="com.joy.bean.InitBeanPostProcessor"></bean>-->
+    <!--使用阿里的DruidDataSource-->
+    <!--增加了一句外部配置文件-->
+    <contest:property-placeholder location="dbconfig.properties"/>
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="username" value="${jdbc.username}"></property>
+        <property name="password" value="${jdbc.password}"></property>
+    </bean>
 </beans>

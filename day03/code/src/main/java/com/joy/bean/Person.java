@@ -19,6 +19,16 @@ public class Person {
     //增加复杂的操作
     private List<Address> addList;
 
+    //初始化方法
+    public void init(){
+        System.out.println("调用初始化方法");
+    }
+
+    //销毁方法
+    public void destory(){
+        System.out.println("调用销毁方法");
+    }
+
     public List<Address> getAddList() {
         return addList;
     }

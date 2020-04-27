@@ -1,3 +1,4 @@
+import com.alibaba.druid.pool.DruidDataSource;
 import com.joy.bean.Person;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -12,7 +13,11 @@ public class MyTest {
     public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext("ioc.xml");
         //测试是否得到数据
-        final Person person = context.getBean("person", Person.class);
-        System.out.println(person);
+//        final Person person = context.getBean("person", Person.class);
+//        System.out.println(person);
+        final DruidDataSource dataSource = context.getBean("dataSource", DruidDataSource.class);
+        System.out.println(dataSource.getUsername());
+        //要调用销毁方法
+        ((ClassPathXmlApplicationContext) context).close();
     }
 }
