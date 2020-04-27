@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <!--利用工厂进行创建
+    1.静态工厂类操作
+    核心就是factory-method="getInter"
+    -->
+    <!--<bean id="person" class="com.joy.bean.com.joy.factory.StaticObjFactory" factory-method="getInter"></bean>-->
+    <!--使用实例化工厂类的方式
+    1.创建实例化工厂类
+    2.使用factory-bean来引用实例化的类,在使用factory-method方法来进行操作
+    -->
+    <bean id="objFactory" class="com.joy.bean.com.joy.factory.ObjFactory"></bean>
+    <bean id="person" class="com.joy.bean.Person" factory-bean="objFactory" factory-method="getPersonObj"></bean>
+</beans>
