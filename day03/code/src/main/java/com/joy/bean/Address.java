@@ -6,6 +6,30 @@ package com.joy.bean;
  * @date 2020/4/28 1:34
  */
 public class Address {
+    private String province;
+    private String city;
+    private String town;
+
+    public Address() {
+        System.out.println("address被创建");
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
     public String getTown() {
         return town;
     }
@@ -14,12 +38,13 @@ public class Address {
         this.town = town;
     }
 
-    private String town;
-
     @Override
     public String toString() {
         return "Address{" +
-                "town='" + town + '\'' +
+                "province='" + province + '\'' +
+                ", city='" + city + '\'' +
+                ", town='" + town + '\'' +
                 '}';
     }
 }
+
