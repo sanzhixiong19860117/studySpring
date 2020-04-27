@@ -3,3 +3,5 @@
 ## 第一天spring基础学习
 
 [SpringIOC容器的配置和使用-1](https://github.com/sanzhixiong19860117/studySpring/tree/master/day02)
+
+[SpringIOC容器的配置和使用-2](https://github.com/sanzhixiong19860117/studySpring/tree/master/day03)
