@@ -1,4 +1,6 @@
+import com.joy.controller.PersonController;
 import org.junit.Test;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * @author joy
@@ -6,8 +8,11 @@ import org.junit.Test;
  */
 public class MyTest {
 
+    ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("ioc.xml");
     @Test
     public void test01(){
-        System.out.println("测试");
+        //基础的使用
+        PersonController personController = context.getBean("personController",PersonController.class);
+        System.out.println(personController);
     }
 }
